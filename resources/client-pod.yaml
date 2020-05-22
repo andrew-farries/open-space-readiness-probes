@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: client-pod
+spec:
+  containers:
+    - name: client-pod
+      image: docker.io/curlimages/curl:latest
+      command: ['sh', '-c', '
+        while [ true ]; do
+          hostname=$(curl http://readiness-example:8090 2> /dev/null);
+          echo $hostname;
+          sleep 0.5;
+        done
+      ']
+

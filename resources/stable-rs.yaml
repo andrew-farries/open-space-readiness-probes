@@ -1,0 +1,23 @@
+apiVersion: extensions/v1beta1
+kind: ReplicaSet
+metadata:
+  name: stable-server-rs
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: readiness-example
+        kind: stable-server
+    spec:
+      containers:
+        - name: stable-server
+          image: docker.io/surjection/stable-server:latest
+          ports:
+            - containerPort: 8090
+          readinessProbe:
+            httpGet:
+              path: /status
+              port: 8090
+            initialDelaySeconds: 3
+            periodSeconds: 1
