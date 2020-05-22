@@ -21,7 +21,6 @@ func hello(w http.ResponseWriter, req *http.Request) {
 	hostname, _ := os.Hostname()
 
 	fmt.Fprintf(w, "%s\n", hostname)
-	w.WriteHeader(200)
 }
 
 func main() {
